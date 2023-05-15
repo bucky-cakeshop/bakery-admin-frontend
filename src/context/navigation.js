@@ -10,7 +10,7 @@ function NavigationProvider({children}) {
 
         };
         /**
-         * Con pushState no se dispara el evento popstate por lo que es necesario actualizar currentPath cusndo hacemos pushState
+         * Con pushState no se dispara el evento popstate por lo que es necesario actualizar currentPath cuando hacemos pushState
          */
         window.addEventListener('popstate', handler);
 
