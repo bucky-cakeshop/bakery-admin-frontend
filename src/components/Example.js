@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Example(props) {
+function Example() {
     return (
         <div>
             Example component !

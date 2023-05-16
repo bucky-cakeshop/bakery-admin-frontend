@@ -2,7 +2,8 @@ import Link from "./Link";
 
 function Sidebar(){
     const links = [
-        {label:'Example', path:"/Example"},
+        {label:'Example', path:"/example"},
+        {label:'Unidades de medidas', path:"/measure-units"},
     ];
 
     const renderLinks = links.map((link) => {

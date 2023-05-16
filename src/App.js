@@ -1,6 +1,7 @@
 import Sidebar from './components/Sidebar';
 import Route from "./components/Route";
 import ExamplePage from "./pages/ExamplePage";
+import MeasureUnitPage from './pages/MeasureUnitPage';
 
 function App() {
     return (
@@ -8,6 +9,7 @@ function App() {
             <Sidebar/>
             <div className='col-span-5'>
                 <Route path="/example"><ExamplePage/></Route>
+                <Route path="/measure-units"><MeasureUnitPage/></Route>
             </div>
         </div>
     )
