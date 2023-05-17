@@ -14,7 +14,7 @@ function MeasureUnitList() {
         loadMeasureUnits();
     }, [])
     return (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-2">
             {
                 measureUnits.map(measureUnit => (
                     <MeasureUnitCard key={measureUnit.id} measureUnit={measureUnit} />

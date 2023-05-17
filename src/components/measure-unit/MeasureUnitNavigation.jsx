@@ -6,8 +6,8 @@ export function Navigation() {
             <Link to="/measure-units">
                 <h1 className="font-bold text-3xl mb-4">Unidades de medida</h1>
             </Link>
-            <button className="bg-indigo-500 px-3 py-2 rounded-lg">
-                <Link to="/measure-units-create">Crear unidad de medida</Link>
+            <button className="bg-red-300 px-3 py-2 rounded-lg hover:bg-red-400">
+                <Link to="/measure-units-create">Nuevo</Link>
             </button>
         </div>
     )

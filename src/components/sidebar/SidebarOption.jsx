@@ -6,7 +6,7 @@ function SidebarOption ({to, children, className, activeClassName, handleOptionS
 
 
     const classes = classNames(
-        'text-blue-500', 
+        'text-black', 
         className,
         selected === to && activeClassName
     );

@@ -6,11 +6,12 @@ export function MeasureUnitCard({ measureUnit }) {
 
     return (
         <div
-            className='bg-blue-300 p-3 hover:bg-blue-400 hover: cursor-pointer rounded'
+            className='bg-orange-200 p-3 hover:bg-orange-400 hover: cursor-pointer rounded'
             onClick={() => {
                 navigate(`/measure-units/${measureUnit.id}`)
             }}
         >
+            {/* <h1 className='font-bold uppercase'>{measureUnit.symbol}</h1> */}
             <h1 className='font-bold uppercase'>{measureUnit.title} ({measureUnit.symbol})</h1>
             <p className='text-black-400'>{measureUnit.description}</p>
         </div>

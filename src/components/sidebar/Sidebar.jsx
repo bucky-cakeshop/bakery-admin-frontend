@@ -17,7 +17,7 @@ function Sidebar() {
             key={link.label}
             to={link.path}
             className="mb-3"
-            activeClassName="font-bold border-l-4 border-blue-500 pl-2"
+            activeClassName="font-bold border-l-4 border-black pl-2"
             handleOptionSelection={handleOptionSelection}
             selected={selectedOption}
         >
@@ -25,7 +25,7 @@ function Sidebar() {
         </SidebarOption>
     })
 
-
+    // className="sticky top-0 overflow-auto scrollbar-hide flex flex-col items-start"
     return (
         <div className="sticky top-0 overflow-auto scrollbar-hide flex flex-col items-start">
             {renderLinks}
