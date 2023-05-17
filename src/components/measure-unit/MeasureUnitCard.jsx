@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom'
-//import useNavigation from "../../hooks/use-navigation";
 
 export function MeasureUnitCard({ measureUnit }) {
-    //const {navigate, currentPath} =  useNavigation();
     const navigate = useNavigate();
 
     return (

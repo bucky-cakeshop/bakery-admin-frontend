@@ -1,26 +1,23 @@
 import classNames from "classnames";
-//import useNavigation from "../hooks/use-navigation";
-import { useNavigate, useLocation  } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-function Link ({to, children, className, activeClassName}){
-    //const {navigate, currentPath} =  useNavigation();
+function SidebarOption ({to, children, className, activeClassName, handleOptionSelection, selected}){
     const navigate = useNavigate();
-    const location = useLocation();
+
 
     const classes = classNames(
         'text-blue-500', 
         className,
-        //currentPath === to && activeClassName
-        location.pathname === to && activeClassName
+        selected === to && activeClassName
     );
 
     const handleClick = (event) => {
         if(event.metaKey || event.ctrlKey) return;
         event.preventDefault();
+        handleOptionSelection(to)
         navigate(to)
-
     }
     return <a className={classes} href={to} onClick={handleClick}>{children}</a>
 }
 
-export default Link
+export default SidebarOption

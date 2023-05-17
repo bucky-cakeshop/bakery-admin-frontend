@@ -9,7 +9,6 @@ function MeasureUnitList() {
         async function loadMeasureUnits() {
             const res = await getAllMeasureUnits();
             setMeasureUnits(res.data);
-            console.log(res)
         }
 
         loadMeasureUnits();

@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import { createMeasureUnit, deleteMeasureUnit, updateMeasureUnit, getMeasureUnit } from '../api/measuerUnit.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
+import { Navigation } from '../components/measure-unit/MeasureUnitNavigation';
 
 function MeasureUnitFormPage() {
-    console.log("MeasureUnitFormPage")
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const navigate = useNavigate();
     const params = useParams();
@@ -20,6 +20,7 @@ function MeasureUnitFormPage() {
             }
         }
         loadMeasureUnit()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onSubmit = handleSubmit(async data => {
@@ -47,6 +48,10 @@ function MeasureUnitFormPage() {
 
     return (
         <div className='max-w-xl mx-auto'>
+            <div className='col-span-2'>
+                <Navigation />
+            </div>
+
             <form action="" onSubmit={onSubmit}>
                 <input
                     type="text"
