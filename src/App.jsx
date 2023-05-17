@@ -3,6 +3,9 @@ import Sidebar from './components/sidebar/Sidebar';
 import ExamplePage from "./pages/ExamplePage";
 import MeasureUnitPage from './pages/MeasureUnitPage';
 import MeasureUnitFormPage from './pages/MeasureUnitFormPage';
+import IngredientPage from './pages/IngredientPage';
+import IngredientFormPage from './pages/IngredientFormPage';
+
 import { Toaster } from 'react-hot-toast'
 
 //grid grid-cols-2 gap-4 mt-4
@@ -22,6 +25,10 @@ function App() {
                         <Route path='/measure-units' element={<MeasureUnitPage />} />
                         <Route path='/measure-units-create' element={<MeasureUnitFormPage />} />
                         <Route path='/measure-units/:id' element={<MeasureUnitFormPage />} />
+                        <Route path='/ingredients' element={<IngredientPage />} />
+                        <Route path='/ingredients-create' element={<IngredientFormPage />} />
+                        <Route path='/ingredients/:id' element={<IngredientFormPage />} />
+
                     </Routes>
                     <Toaster />
                 </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllMeasureUnits } from '../../api/measuerUnit.api'
+import { getAllMeasureUnits } from '../../api/measureUnit.api'
 import { MeasureUnitCard } from "./MeasureUnitCard";
 
 function MeasureUnitList() {

@@ -1,16 +1,31 @@
 import SidebarOption from "./SidebarOption";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function Sidebar() {
     const[selectedOption, setSelectedOption] = useState('');
+    const defaultOption = useLocation();
 
     const links = [
         { label: 'Example', path: "/example" },
         { label: 'Unidades de medidas', path: "/measure-units" },
+        { label: 'Ingredientes', path: "/ingredients" },
     ];
     const handleOptionSelection = (to) => {
         setSelectedOption(to)
     }
+
+    useEffect(() => {
+        async function loadDefaultOption() {
+            console.log(defaultOption.pathname)
+            setSelectedOption(defaultOption.pathname);
+            if (defaultOption.pathname === "/"){
+                setSelectedOption("/example");
+            }
+            
+        }
+        loadDefaultOption();
+    }, [])
 
     const renderLinks = links.map((link) => {
         return <SidebarOption
