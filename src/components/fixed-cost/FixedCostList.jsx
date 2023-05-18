@@ -4,6 +4,7 @@ import { FixedCostCard } from "./FixedCostCard";
 
 function FixedCostList() {
     const [fixedCosts, setFixedCosts] = useState([]);
+    const [fixedCoststotal, setFixedCostsTotal] = useState();
 
     useEffect(() => {
         async function loadFixedCosts() {
@@ -13,7 +14,15 @@ function FixedCostList() {
 
         loadFixedCosts();
     }, [])
+
+    const renderTotal = () => {
+        return fixedCosts.reduce((n, {amount}) => n + amount, 0);
+        //return fixedCosts.reduce((n, {amount}) => n + amount, 0);
+    };
+
     return (
+        <div className="container">
+        <div className="flex mx-auto font-bold">Total: €{renderTotal()}</div>
         <div className="grid grid-cols-3 gap-2">
             {
                 fixedCosts.map(fixedCost => (
@@ -21,6 +30,7 @@ function FixedCostList() {
                 ))
             }
 
+        </div>
         </div>
     );
 }

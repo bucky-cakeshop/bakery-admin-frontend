@@ -103,7 +103,7 @@ function IngredientFormPage() {
                                     }
                                 })
 
-                                navigate('/')
+                                navigate('/ingredients')
                             }
                         }}
                     >

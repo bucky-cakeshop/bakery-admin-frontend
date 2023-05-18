@@ -95,7 +95,7 @@ function FixedCostFormPage() {
                                     }
                                 })
 
-                                navigate('/')
+                                navigate('/fixed-costs')
                             }
                         }}
                     >
