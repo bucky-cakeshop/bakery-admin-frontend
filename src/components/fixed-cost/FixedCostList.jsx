@@ -21,16 +21,16 @@ function FixedCostList() {
     };
 
     return (
-        <div className="container">
-        <div className="flex mx-auto font-bold">Total: €{renderTotal()}</div>
-        <div className="grid grid-cols-3 gap-2">
-            {
-                fixedCosts.map(fixedCost => (
-                    <FixedCostCard key={fixedCost.id} fixedCost={fixedCost} />
-                ))
-            }
+        <div>
+            <div className="flex mx-auto font-bold">Total: €{renderTotal()}</div>
+            <div className="grid grid-cols-3 gap-2">
+                {
+                    fixedCosts.map(fixedCost => (
+                        <FixedCostCard key={fixedCost.id} fixedCost={fixedCost} />
+                    ))
+                }
 
-        </div>
+            </div>
         </div>
     );
 }
