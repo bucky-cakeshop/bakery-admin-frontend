@@ -1,3 +1,6 @@
+(D) Main page/Sidebar: Add title
+(D) Miro: Roadmap section
+(D) Miro: Products will be the nexus btween production and sells
 (D) General: Create a "class component"/"common component" for Navigation elements (title + button)
 (D) Ingrdients: Add the symbol to ingredint card
 (D) Ingrdients: Load the measure unit when update

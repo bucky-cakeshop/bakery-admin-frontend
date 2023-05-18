@@ -7,9 +7,11 @@ function Sidebar() {
     const defaultOption = useLocation();
 
     const links = [
+        { label: 'Bucky - Bakery admin', path: "/" },
         { label: 'Example', path: "/example" },
         { label: 'Unidades de medidas', path: "/measure-units" },
         { label: 'Ingredientes', path: "/ingredients" },
+        { label: 'Costos fijos', path: "/fixed-costs" },
     ];
     const handleOptionSelection = (to) => {
         setSelectedOption(to)
@@ -17,7 +19,6 @@ function Sidebar() {
 
     useEffect(() => {
         async function loadDefaultOption() {
-            console.log(defaultOption.pathname)
             setSelectedOption(defaultOption.pathname);
             if (defaultOption.pathname === "/"){
                 setSelectedOption("/example");

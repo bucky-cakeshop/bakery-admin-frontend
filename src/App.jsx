@@ -5,6 +5,8 @@ import MeasureUnitPage from './pages/MeasureUnitPage';
 import MeasureUnitFormPage from './pages/MeasureUnitFormPage';
 import IngredientPage from './pages/IngredientPage';
 import IngredientFormPage from './pages/IngredientFormPage';
+import FixedCostPage from './pages/FixedCostPage';
+import FixedCostFormPage from './pages/FixedCostFormPage';
 
 import { Toaster } from 'react-hot-toast'
 
@@ -13,21 +15,28 @@ import { Toaster } from 'react-hot-toast'
 // bg-blue-100
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter>           
             <div className="container h-full flex">
-                <div className='w-[312px] h-[1000px] bg-gray-100 flex-none ml-2 mt-2 px-2 rounded-lg'>
+                
+                <div className='w-[200px] h-[1000px] bg-gray-100 flex-none ml-2 mt-2 px-2 rounded-lg'>
                     <Sidebar />
                 </div>
                 <div className='w-full mx-auto ml-2 mt-2 bg-gray-100 px-2 rounded-lg'>
                     <Routes>
                         <Route path='/' element={<Navigate to={"/example"} />} />
                         <Route path='/example' element={<ExamplePage />} />
+                        
                         <Route path='/measure-units' element={<MeasureUnitPage />} />
                         <Route path='/measure-units-create' element={<MeasureUnitFormPage />} />
                         <Route path='/measure-units/:id' element={<MeasureUnitFormPage />} />
+
                         <Route path='/ingredients' element={<IngredientPage />} />
                         <Route path='/ingredients-create' element={<IngredientFormPage />} />
                         <Route path='/ingredients/:id' element={<IngredientFormPage />} />
+
+                        <Route path='/fixed-costs' element={<FixedCostPage />} />
+                        <Route path='/fixed-costs-create' element={<FixedCostFormPage />} />
+                        <Route path='/fixed-costs/:id' element={<FixedCostFormPage />} />
 
                     </Routes>
                     <Toaster />

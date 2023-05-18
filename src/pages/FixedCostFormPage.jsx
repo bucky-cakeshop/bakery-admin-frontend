@@ -1,32 +1,32 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { createMeasureUnit, deleteMeasureUnit, updateMeasureUnit, getMeasureUnit } from '../api/measureUnit.api';
+import { createFixedCost, deleteFixedCost, updateFixedCost, getFixedCost } from '../api/fixedCost.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 
-function MeasureUnitFormPage() {
+function FixedCostFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
-        async function loadMeasureUnit() {
+        async function loadFixedCost() {
             if (params.id) {
-                const res = await getMeasureUnit(params.id)
+                const res = await getFixedCost(params.id)
                 setValue('title', res.data.title)
                 setValue('description', res.data.description)
-                setValue('symbol', res.data.symbol)
+                setValue('amount', res.data.amount)
             }
         }
-        loadMeasureUnit()
+        loadFixedCost()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onSubmit = handleSubmit(async data => {
         if (params.id) {
-            await updateMeasureUnit(params.id, data)
-            toast.success('unidad de medida actualizada', {
+            await updateFixedCost(params.id, data)
+            toast.success('Costo fijo actualizado', {
                 position: "bottom-right",
                 style: {
                     background: "#101010",
@@ -34,8 +34,8 @@ function MeasureUnitFormPage() {
                 }
             })
         } else {
-            await createMeasureUnit(data);
-            toast.success('Unidad de medida creada', {
+            await createFixedCost(data);
+            toast.success('Costo fijo creado', {
                 position: "bottom-right",
                 style: {
                     background: "#101010",
@@ -43,13 +43,13 @@ function MeasureUnitFormPage() {
                 }
             })
         }
-        navigate('/measure-units')
+        navigate('/fixed-costs')
     })
 
     return (
         <div className='max-w-xl mx-auto'>
             <div className='col-span-2'>
-                <ComponentNavigationHeader listPath="/measure-units" createPath="/measure-units-create" title="Unidades de medida" />
+                <ComponentNavigationHeader listPath="/fixed-costs" createPath="/fixed-costs-create" title="Costos fijos" />
             </div>
 
             <form action="" onSubmit={onSubmit}>
@@ -63,8 +63,8 @@ function MeasureUnitFormPage() {
 
                 <input
                     type="text"
-                    placeholder="Símbolo"
-                    {...register("symbol", { required: true })}
+                    placeholder="amount"
+                    {...register("amount", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
                 />
                 {errors.symbol && <span>Campo requerido</span>}
@@ -86,8 +86,8 @@ function MeasureUnitFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Seguro de eliminar?');
                             if (accepted) {
-                                await deleteMeasureUnit(params.id)
-                                toast.success('Unidad de medida eliminada', {
+                                await deleteFixedCost(params.id)
+                                toast.success('Costo fijo eliminado', {
                                     position: "bottom-right",
                                     style: {
                                         background: "#101010",
@@ -95,7 +95,7 @@ function MeasureUnitFormPage() {
                                     }
                                 })
 
-                                navigate('/measure-units')
+                                navigate('/')
                             }
                         }}
                     >
@@ -108,4 +108,4 @@ function MeasureUnitFormPage() {
     )
 }
 
-export default MeasureUnitFormPage;
+export default FixedCostFormPage;

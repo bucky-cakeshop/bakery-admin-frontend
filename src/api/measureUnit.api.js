@@ -6,16 +6,16 @@ const URL = process.env.NODE_ENV === 'production'
     : 'http://localhost:8000'
 
 
-const taskApi = axios.create({
+const measureUnitApi = axios.create({
     baseURL: `${URL}/bakeryAdmin/api/v1/measure-unit`
 })
 
-export const getAllMeasureUnits = () => taskApi.get('/')
+export const getAllMeasureUnits = () => measureUnitApi.get('/')
 
-export const getMeasureUnit = (id) => taskApi.get(`/${id}`)
+export const getMeasureUnit = (id) => measureUnitApi.get(`/${id}`)
 
-export const createMeasureUnit = (task) => taskApi.post('/', task)
+export const createMeasureUnit = (measureUnit) => measureUnitApi.post('/', measureUnit)
 
-export const deleteMeasureUnit = (id) => taskApi.delete(`/${id}`)
+export const deleteMeasureUnit = (id) => measureUnitApi.delete(`/${id}`)
 
-export const updateMeasureUnit = (id, task) => taskApi.put(`/${id}/`, task)
+export const updateMeasureUnit = (id, measureUnit) => measureUnitApi.put(`/${id}/`, measureUnit)
