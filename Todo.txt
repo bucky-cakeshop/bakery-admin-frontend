@@ -1,0 +1,4 @@
+(D) General: Create a "class component"/"common component" for Navigation elements (title + button)
+(D) Ingrdients: Add the symbol to ingredint card
+(D) Ingrdients: Load the measure unit when update
+(D) Ingrdeints: Fix "no selected measure unit" error when enter the first time and don't change the select control

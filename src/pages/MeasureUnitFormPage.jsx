@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { createMeasureUnit, deleteMeasureUnit, updateMeasureUnit, getMeasureUnit } from '../api/measureUnit.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
-import { Navigation } from '../components/measure-unit/MeasureUnitNavigation';
+import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 
 function MeasureUnitFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -49,7 +49,7 @@ function MeasureUnitFormPage() {
     return (
         <div className='max-w-xl mx-auto'>
             <div className='col-span-2'>
-                <Navigation />
+                <ComponentNavigationHeader listPath="/measure-units" createPath="/measure-units-create" title="Unidades de medida" />
             </div>
 
             <form action="" onSubmit={onSubmit}>

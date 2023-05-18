@@ -4,7 +4,7 @@ import { createIngredient, deleteIngredient, updateIngredient, getIngredient } f
 import { getAllMeasureUnits } from '../api/measureUnit.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
-import { IngredientNavigation } from '../components/ingredient/IngredientNavigation';
+import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 
 function IngredientFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -17,7 +17,7 @@ function IngredientFormPage() {
             if (params.id) {
                 const res = await getIngredient(params.id)
                 setValue('name', res.data.name)
-                setValue('Unidad de medida', res.data.measureUnit)
+                setValue('measureUnit', res.data.measureUnit)
             }
         }
         async function loadMeasureUnits(){
@@ -46,7 +46,6 @@ function IngredientFormPage() {
                 }
             })
         } else {
-            console.log(data)
             await createIngredient(data);
             toast.success('Ingrediente creado', {
                 position: "bottom-right",
@@ -62,7 +61,7 @@ function IngredientFormPage() {
     return (
         <div className='max-w-xl mx-auto'>
             <div className='col-span-2'>
-                <IngredientNavigation />
+                <ComponentNavigationHeader listPath="/ingredients" createPath="/ingredients-create" title="Ingredientes" />
             </div>
 
             <form action="" onSubmit={onSubmit}>
@@ -75,11 +74,13 @@ function IngredientFormPage() {
                 {errors.name && <span>Campo requerido</span>}
 
                 <select
+                    name="measureUnit"
                     placeholder="measureUnit"
                     {...register("measureUnit", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
                 >
-                {populateMeasuerUnits()}
+                    <option value="">Seleccionar</option>
+                    {populateMeasuerUnits()}
                 
                 </select>
                 {errors.measureUnit && <span>Campo requerido</span>}

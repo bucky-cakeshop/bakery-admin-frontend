@@ -1,11 +1,11 @@
 import IngredientList from '../components/ingredient/IngredientList'
-import { IngredientNavigation } from '../components/ingredient/IngredientNavigation';
+import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 
 function IngredientPage() {
     return(
         <div>
             <div className='col-span-2'>
-                <IngredientNavigation />
+                <ComponentNavigationHeader listPath="/ingredients" createPath="/ingredients-create" title="Ingredientes" />
             </div>
             <div>
                 <IngredientList />

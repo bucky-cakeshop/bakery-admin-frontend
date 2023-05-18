@@ -11,7 +11,7 @@ export function IngredientCard({ ingredient }) {
                 navigate(`/ingredients/${ingredient.id}`)
             }}
         >
-            <h1 className='font-bold uppercase'>{ingredient.name}</h1>
+            <h1 className='font-bold uppercase'>{ingredient.name} ({ingredient.measureUnit_object.symbol})</h1>
             {/* <p className='text-black-400'>{ingredient.description}</p> */}
         </div>
     );
