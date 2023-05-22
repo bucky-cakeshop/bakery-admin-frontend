@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import { createIngredient, deleteIngredient, updateIngredient, getIngredient } from '../api/ingredient.api';
-import { getAllMeasureUnits } from '../api/measureUnit.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
@@ -16,18 +15,11 @@ function IngredientFormPage() {
             if (params.id) {
                 const res = await getIngredient(params.id)
                 setValue('name', res.data.name)
-                // setValue('measureUnit', res.data.measureUnit)
             }
         }
         loadIngredient()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // const populateMeasuerUnits = () =>{
-    //     return measureUnits.map((option, index) => (
-    //         <option key={option.id} value={option.id}>{option.title}</option>
-    //       ));
-    // }
 
     const onSubmit = handleSubmit(async data => {
         if (params.id) {
@@ -66,18 +58,6 @@ function IngredientFormPage() {
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
                 />
                 {errors.name && <span>Campo requerido</span>}
-
-                {/* <select
-                    name="measureUnit"
-                    placeholder="measureUnit"
-                    {...register("measureUnit", { required: true })}
-                    className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
-                >
-                    <option value="">Seleccionar</option>
-                    {populateMeasuerUnits()}
-                
-                </select>
-                {errors.measureUnit && <span>Campo requerido</span>} */}
 
                 <button className=' bg-indigo-500 p-3 rounded-lg block w-full mt-3'>Guardar</button>
             </form>

@@ -49,7 +49,7 @@ function RecipeFormPage() {
     return (
         <div className='max-w-5xl mx-auto'>
             <div className='col-span-2'>
-                <ComponentNavigationHeader listPath="/recipe" createPath="/recipe-create" title="Recetas" />
+                <ComponentNavigationHeader listPath="/recipes" createPath="/recipes-create" title="Recetas" />
             </div>
 
             <form action="" onSubmit={onSubmit}>

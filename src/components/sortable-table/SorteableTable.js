@@ -8,13 +8,21 @@ function SorteableTable(props){
 
     const updatedConfig = config.map((column)=>{
         if(!column.sortValue){
-            return column;
+            return  {
+                ...column,
+                header: () => <th className="cursor-pointer hover:bg-gray-100" 
+                onClick={()=>setSortColumn(column.label)}>
+                    <div className="flex items-center">
+                        {column.label}
+                    </div>
+                </th>
+            }
         }
         return {
             ...column,
             header: () => <th className="cursor-pointer hover:bg-gray-100" 
             onClick={()=>setSortColumn(column.label)}>
-                <div className="flex items-denter">
+                <div className="flex items-center">
                     {column.label}
                     {getIcons(column.label, sortBy, sortOrder)}
                 </div>
