@@ -7,12 +7,11 @@ import IngredientPage from './pages/IngredientPage';
 import IngredientFormPage from './pages/IngredientFormPage';
 import FixedCostPage from './pages/FixedCostPage';
 import FixedCostFormPage from './pages/FixedCostFormPage';
+import RecipePage from './pages/RecipePage';
+import RecipeFormPage from './pages/RecipeFormPage';
 
 import { Toaster } from 'react-hot-toast'
 
-//grid grid-cols-2 gap-4 mt-4
-// bg-red-100
-// bg-blue-100
 function App() {
     return (
         <BrowserRouter>           
@@ -38,6 +37,9 @@ function App() {
                         <Route path='/fixed-costs-create' element={<FixedCostFormPage />} />
                         <Route path='/fixed-costs/:id' element={<FixedCostFormPage />} />
 
+                        <Route path='/recipes' element={<RecipePage />} />
+                        <Route path='/recipes-create' element={<RecipeFormPage />} />
+                        <Route path='/recipes/:id' element={<RecipeFormPage />} />
                     </Routes>
                     <Toaster />
                 </div>

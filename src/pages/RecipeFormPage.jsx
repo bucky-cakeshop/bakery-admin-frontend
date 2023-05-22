@@ -1,38 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { createIngredient, deleteIngredient, updateIngredient, getIngredient } from '../api/ingredient.api';
-import { getAllMeasureUnits } from '../api/measureUnit.api';
+import { createRecipe, deleteRecipe, updateRecipe, getRecipe } from '../api/recipe.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
+import { RecipeDetails } from '../components/recipe/RecipeDetails';
 
-function IngredientFormPage() {
+function RecipeFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
-        async function loadIngredient() {
+        async function loadRecipe() {
             if (params.id) {
-                const res = await getIngredient(params.id)
-                setValue('name', res.data.name)
-                // setValue('measureUnit', res.data.measureUnit)
+                const res = await getRecipe(params.id)
+                setValue('title', res.data.title)
+                setValue('description', res.data.description)
             }
         }
-        loadIngredient()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        loadRecipe()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // const populateMeasuerUnits = () =>{
-    //     return measureUnits.map((option, index) => (
-    //         <option key={option.id} value={option.id}>{option.title}</option>
-    //       ));
-    // }
 
     const onSubmit = handleSubmit(async data => {
         if (params.id) {
-            await updateIngredient(params.id, data)
-            toast.success('ingrediente actualizado', {
+            await updateRecipe(params.id, data)
+            toast.success('Receta actualizada', {
                 position: "bottom-right",
                 style: {
                     background: "#101010",
@@ -40,8 +34,8 @@ function IngredientFormPage() {
                 }
             })
         } else {
-            await createIngredient(data);
-            toast.success('Ingrediente creado', {
+            await createRecipe(data);
+            toast.success('Receta creada', {
                 position: "bottom-right",
                 style: {
                     background: "#101010",
@@ -49,35 +43,31 @@ function IngredientFormPage() {
                 }
             })
         }
-        navigate('/ingredients')
+        navigate('/recipes')
     })
 
     return (
-        <div className='max-w-xl mx-auto'>
+        <div className='max-w-5xl mx-auto'>
             <div className='col-span-2'>
-                <ComponentNavigationHeader listPath="/ingredients" createPath="/ingredients-create" title="Ingredientes" />
+                <ComponentNavigationHeader listPath="/recipe" createPath="/recipe-create" title="Recetas" />
             </div>
 
             <form action="" onSubmit={onSubmit}>
                 <input
                     type="text"
-                    placeholder="name"
-                    {...register("name", { required: true })}
+                    placeholder="Title"
+                    {...register("title", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
                 />
-                {errors.name && <span>Campo requerido</span>}
+                {errors.title && <span>Campo requerido</span>}
 
-                {/* <select
-                    name="measureUnit"
-                    placeholder="measureUnit"
-                    {...register("measureUnit", { required: true })}
+                <textarea
+                    rows="3"
+                    placeholder="Description"
+                    {...register("description", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
-                >
-                    <option value="">Seleccionar</option>
-                    {populateMeasuerUnits()}
-                
-                </select>
-                {errors.measureUnit && <span>Campo requerido</span>} */}
+                />
+                {errors.description && <span>Campo requerido</span>}
 
                 <button className=' bg-indigo-500 p-3 rounded-lg block w-full mt-3'>Guardar</button>
             </form>
@@ -88,8 +78,8 @@ function IngredientFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Seguro de eliminar?');
                             if (accepted) {
-                                await deleteIngredient(params.id)
-                                toast.success('Ingrediente eliminado', {
+                                await deleteRecipe(params.id)
+                                toast.success('Receta eliminada', {
                                     position: "bottom-right",
                                     style: {
                                         background: "#101010",
@@ -97,7 +87,7 @@ function IngredientFormPage() {
                                     }
                                 })
 
-                                navigate('/ingredients')
+                                navigate('/recipes')
                             }
                         }}
                     >
@@ -105,9 +95,12 @@ function IngredientFormPage() {
                     </button>
                 </div>
             }
-
+            {/* Veremos la tabla de ingredientes cuando estoy editando */}
+            {params.id &&
+                <RecipeDetails recipeId={params.id}></RecipeDetails>
+            }
         </div>
     )
 }
 
-export default IngredientFormPage;
+export default RecipeFormPage;

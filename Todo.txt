@@ -1,3 +1,4 @@
+Equivalences. https://stackoverflow.com/questions/32310511/django-populate-table-on-startup-with-known-values
 (D) Main page/Sidebar: Add title
 (D) Miro: Roadmap section
 (D) Miro: Products will be the nexus btween production and sells

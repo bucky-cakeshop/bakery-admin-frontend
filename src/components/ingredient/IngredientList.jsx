@@ -14,7 +14,7 @@ function IngredientList() {
         loadIngredients();
     }, [])
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-5 gap-2">
             {
                 ingredients.map(ingredient => (
                     <IngredientCard key={ingredient.id} ingredient={ingredient} />

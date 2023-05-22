@@ -12,6 +12,7 @@ function Sidebar() {
         { label: 'Unidades de medidas', path: "/measure-units" },
         { label: 'Ingredientes', path: "/ingredients" },
         { label: 'Costos fijos', path: "/fixed-costs" },
+        { label: 'Recetas', path: "/recipes" },
     ];
     const handleOptionSelection = (to) => {
         setSelectedOption(to)
