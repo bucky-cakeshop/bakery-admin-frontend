@@ -9,9 +9,10 @@ function Sidebar() {
     const links = [
         { label: 'Bucky - Bakery admin', path: "/" },
         { label: 'Example', path: "/example" },
+        { label: 'Costos fijos', path: "/fixed-costs" },        
         { label: 'Unidades de medidas', path: "/measure-units" },
         { label: 'Ingredientes', path: "/ingredients" },
-        { label: 'Costos fijos', path: "/fixed-costs" },
+        { label: 'Proveedores', path: "/suppliers" },
         { label: 'Recetas', path: "/recipes" },
     ];
     const handleOptionSelection = (to) => {

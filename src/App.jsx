@@ -9,6 +9,8 @@ import FixedCostPage from './pages/FixedCostPage';
 import FixedCostFormPage from './pages/FixedCostFormPage';
 import RecipePage from './pages/RecipePage';
 import RecipeFormPage from './pages/RecipeFormPage';
+import SupplierPage from './pages/SupplierPage';
+import SupplierFormPage from './pages/SupplierFormPage';
 
 import { Toaster } from 'react-hot-toast'
 
@@ -40,6 +42,11 @@ function App() {
                         <Route path='/recipes' element={<RecipePage />} />
                         <Route path='/recipes-create' element={<RecipeFormPage />} />
                         <Route path='/recipes/:id' element={<RecipeFormPage />} />
+
+                        <Route path='/suppliers' element={<SupplierPage />} />
+                        <Route path='/suppliers-create' element={<SupplierFormPage />} />
+                        <Route path='/suppliers/:id' element={<SupplierFormPage />} />
+
                     </Routes>
                     <Toaster />
                 </div>
