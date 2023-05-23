@@ -28,7 +28,6 @@ function SupplierFormPage() {
     const onSubmit = handleSubmit(async data => {
         if (params.id) {
             const response = await updateSupplier(params.id, data)
-            console.log(response)
             if (response.status === 400) {
                 toast.error('Error al actualizar: ' + response.data.email, {
                     position: "bottom-right",
