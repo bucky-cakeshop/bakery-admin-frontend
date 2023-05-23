@@ -10,7 +10,7 @@ function SorteableTable(props){
         if(!column.sortValue){
             return  {
                 ...column,
-                header: () => <th className="cursor-pointer hover:bg-gray-100" 
+                header: () => <th
                 onClick={()=>setSortColumn(column.label)}>
                     <div className="flex items-center">
                         {column.label}

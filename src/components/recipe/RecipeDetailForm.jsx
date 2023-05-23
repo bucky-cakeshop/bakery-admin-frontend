@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { getAllIngredients } from '../../api/ingredient.api';
 import { getAllMeasureUnits } from '../../api/measureUnit.api';
@@ -8,7 +7,7 @@ import { createRecipeDetail } from '../../api/recipeDetail.api';
 
 export function RecipeDetailForm({ recipeId, detailsChanged }) {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-    const navigate = useNavigate();
+
     const [measureUnits, setMeasureUnits] = useState([])
     const [ingredients, setIngredients] = useState([])
 
@@ -55,6 +54,9 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
                 }
             })
             detailsChanged()
+            setValue('ingredient',0)
+            setValue('measureUnit',0)
+            setValue('quantity','')
         }
     })
 
