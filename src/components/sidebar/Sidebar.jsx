@@ -11,9 +11,11 @@ function Sidebar() {
         { label: 'Example', path: "/example" },
         { label: 'Costos fijos', path: "/fixed-costs" },        
         { label: 'Unidades de medidas', path: "/measure-units" },
+        { label: 'Marcas', path: "/makes" },
         { label: 'Ingredientes', path: "/ingredients" },
         { label: 'Proveedores', path: "/suppliers" },
         { label: 'Recetas', path: "/recipes" },
+        { label: 'Ordenes de compra', path: "/buy-orders" },
     ];
     const handleOptionSelection = (to) => {
         setSelectedOption(to)

@@ -3,6 +3,8 @@ import Sidebar from './components/sidebar/Sidebar';
 import ExamplePage from "./pages/ExamplePage";
 import MeasureUnitPage from './pages/MeasureUnitPage';
 import MeasureUnitFormPage from './pages/MeasureUnitFormPage';
+import MakePage from './pages/MakePage';
+import MakeFormPage from './pages/MakeFormPage';
 import IngredientPage from './pages/IngredientPage';
 import IngredientFormPage from './pages/IngredientFormPage';
 import FixedCostPage from './pages/FixedCostPage';
@@ -11,6 +13,8 @@ import RecipePage from './pages/RecipePage';
 import RecipeFormPage from './pages/RecipeFormPage';
 import SupplierPage from './pages/SupplierPage';
 import SupplierFormPage from './pages/SupplierFormPage';
+import BuyOrderPage from './pages/BuyOrderPage';
+import BuyOrderFormPage from './pages/BuyOrderFormPage';
 
 import { Toaster } from 'react-hot-toast'
 
@@ -26,26 +30,34 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Navigate to={"/example"} />} />
                         <Route path='/example' element={<ExamplePage />} />
-                        
-                        <Route path='/measure-units' element={<MeasureUnitPage />} />
-                        <Route path='/measure-units-create' element={<MeasureUnitFormPage />} />
-                        <Route path='/measure-units/:id' element={<MeasureUnitFormPage />} />
-
-                        <Route path='/ingredients' element={<IngredientPage />} />
-                        <Route path='/ingredients-create' element={<IngredientFormPage />} />
-                        <Route path='/ingredients/:id' element={<IngredientFormPage />} />
 
                         <Route path='/fixed-costs' element={<FixedCostPage />} />
                         <Route path='/fixed-costs-create' element={<FixedCostFormPage />} />
                         <Route path='/fixed-costs/:id' element={<FixedCostFormPage />} />
 
-                        <Route path='/recipes' element={<RecipePage />} />
-                        <Route path='/recipes-create' element={<RecipeFormPage />} />
-                        <Route path='/recipes/:id' element={<RecipeFormPage />} />
+                        <Route path='/measure-units' element={<MeasureUnitPage />} />
+                        <Route path='/measure-units-create' element={<MeasureUnitFormPage />} />
+                        <Route path='/measure-units/:id' element={<MeasureUnitFormPage />} />
+
+                        <Route path='/makes' element={<MakePage />} />
+                        <Route path='/makes-create' element={<MakeFormPage />} />
+                        <Route path='/makes/:id' element={<MakeFormPage />} />
+
+                        <Route path='/ingredients' element={<IngredientPage />} />
+                        <Route path='/ingredients-create' element={<IngredientFormPage />} />
+                        <Route path='/ingredients/:id' element={<IngredientFormPage />} />
 
                         <Route path='/suppliers' element={<SupplierPage />} />
                         <Route path='/suppliers-create' element={<SupplierFormPage />} />
                         <Route path='/suppliers/:id' element={<SupplierFormPage />} />
+
+                        <Route path='/recipes' element={<RecipePage />} />
+                        <Route path='/recipes-create' element={<RecipeFormPage />} />
+                        <Route path='/recipes/:id' element={<RecipeFormPage />} />
+
+                        <Route path='/buy-orders' element={<BuyOrderPage />} />
+                        <Route path='/buy-orders-create' element={<BuyOrderFormPage />} />
+                        <Route path='/buy-orders/:id' element={<BuyOrderFormPage />} />
 
                     </Routes>
                     <Toaster />
