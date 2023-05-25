@@ -1,15 +1,15 @@
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-hot-toast';
 import DatePicker from "react-multi-date-picker";
-
 import { useEffect, useState } from 'react';
 import { getAllIngredients } from '../../api/ingredient.api';
 import { getAllMeasureUnits } from '../../api/measureUnit.api';
 import { getAllMakes } from '../../api/make.api';
-import { createBuyOrderDetail } from '../../api/buyOrderDetail.api';
+import { createSupplierInvoiceDetail } from '../../api/supplierInvoiceDetail.api';
+import moment from 'moment/moment';
 
-export function BuyOrderDetailForm({ buyOrderId, detailsChanged }) {
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+export function SupplierInvoiceDetailForm({ supplierInvoiceId, detailsChanged }) {
+    const { register, handleSubmit, formState: { errors }, setValue, control } = useForm();
 
     const [measureUnits, setMeasureUnits] = useState([])
     const [ingredients, setIngredients] = useState([])
@@ -52,18 +52,18 @@ export function BuyOrderDetailForm({ buyOrderId, detailsChanged }) {
     }
 
     const onSubmit = handleSubmit(async data => {
-        if (buyOrderId) {
+        if (supplierInvoiceId) {
             const payload = {
-                buyOrder: parseInt(buyOrderId),
+                supplierInvoice: parseInt(supplierInvoiceId),
                 ingredient: parseInt(data.ingredient),
                 measureUnit: parseInt(data.measureUnit),
                 make: parseInt(data.make),
                 quantity: parseFloat(data.quantity),
                 price: parseFloat(data.price),
                 batch: data.batch.toUpperCase(),
-                expirationDate: data.expirationDate
+                expirationDate: moment(new Date(data.expirationDate)).format('YYYY-MM-DD')
             }
-            await createBuyOrderDetail(payload)
+            await createSupplierInvoiceDetail(payload)
             toast.success('Se ha creado el item de la orden de compra', {
                 position: "bottom-right",
                 style: {
@@ -84,7 +84,7 @@ export function BuyOrderDetailForm({ buyOrderId, detailsChanged }) {
 
     return (
         <div>
-            <form action="" onSubmit={onSubmit} className='grid grid-cols-3 gap-2 mb-5 grid-rows-2'>
+            <form action="" onSubmit={onSubmit} className='grid grid-cols-4 gap-2 mb-5 grid-rows-2'>
                 <select
                     name="ingredient"
                     placeholder="Ingrediente"
@@ -134,17 +134,27 @@ export function BuyOrderDetailForm({ buyOrderId, detailsChanged }) {
                     {...register("batch", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg'
                 />
-                <DatePicker
-                    //value={value || ""}
-                    // onChange={(date) => {
-                    //     onChange(date?.isValid ? date : "");
-                    // }}
-                    format={"DD/MM/YYYY"}
-                    {...register("expirationDate", { required: true })}
-                    inputClass='bg-blue-100 p-3 rounded-lg'
+                <Controller
+                    control={control}
+                    name="expirationDate"
+                    rules={{ required: true }}
+                    render={({
+                        field: { onChange, name, value },
+                        fieldState: { invalid, isDirty },
+                        formState: { errors },
+                    }) => (
+                        <>
+                            <DatePicker
+                                value={value || ""}
+                                onChange={(date) => {
+                                    onChange(date?.isValid ? date : "");
+                                }}
+                                format={"DD/MM/YYYY"}
+                                inputClass=' bg-blue-100 p-3 rounded-lg'
+                            />
+                        </>
+                    )}
                 />
-                <span></span>
-
                 <button className=' bg-blue-400 rounded-lg'>Agregar</button>
 
                 {errors.ingredient && <span className='font-bold text-red-500'>Ingrediente es requerido</span>}

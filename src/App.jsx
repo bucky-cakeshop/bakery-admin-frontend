@@ -13,8 +13,11 @@ import RecipePage from './pages/RecipePage';
 import RecipeFormPage from './pages/RecipeFormPage';
 import SupplierPage from './pages/SupplierPage';
 import SupplierFormPage from './pages/SupplierFormPage';
-import BuyOrderPage from './pages/BuyOrderPage';
-import BuyOrderFormPage from './pages/BuyOrderFormPage';
+import SupplierInvoicePage from './pages/SupplierInvoicePage';
+import SupplierInvoiceFormPage from './pages/SupplierInvoiceFormPage';
+import ProductionOrderPage from './pages/ProductionOrderPage';
+import ProductionOrderFormPage from './pages/ProductionOrderFormPage';
+
 
 import { Toaster } from 'react-hot-toast'
 
@@ -55,9 +58,13 @@ function App() {
                         <Route path='/recipes-create' element={<RecipeFormPage />} />
                         <Route path='/recipes/:id' element={<RecipeFormPage />} />
 
-                        <Route path='/buy-orders' element={<BuyOrderPage />} />
-                        <Route path='/buy-orders-create' element={<BuyOrderFormPage />} />
-                        <Route path='/buy-orders/:id' element={<BuyOrderFormPage />} />
+                        <Route path='/supplier-invoice' element={<SupplierInvoicePage />} />
+                        <Route path='/supplier-invoice-create' element={<SupplierInvoiceFormPage />} />
+                        <Route path='/supplier-invoice/:id' element={<SupplierInvoiceFormPage />} />
+
+                        <Route path='/production-orders' element={<ProductionOrderPage />} />
+                        <Route path='/production-orders-create' element={<ProductionOrderFormPage />} />
+                        <Route path='/production-orders/:id' element={<ProductionOrderFormPage />} />
 
                     </Routes>
                     <Toaster />

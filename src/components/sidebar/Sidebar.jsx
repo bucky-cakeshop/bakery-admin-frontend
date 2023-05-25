@@ -15,7 +15,8 @@ function Sidebar() {
         { label: 'Ingredientes', path: "/ingredients" },
         { label: 'Proveedores', path: "/suppliers" },
         { label: 'Recetas', path: "/recipes" },
-        { label: 'Ordenes de compra', path: "/buy-orders" },
+        { label: 'C. de proveedores', path: "/supplier-invoice" },
+        { label: 'O. de producción', path: "/production-orders" },
     ];
     const handleOptionSelection = (to) => {
         setSelectedOption(to)

@@ -1,32 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
-import { createBuyOrder, deleteBuyOrder, updateBuyOrder, getBuyOrder } from '../api/buyOrder.api';
+import { createProductionOrder, deleteProductionOrder, updateProductionOrder, getProductionOrder } from '../api/productionOrder.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
-import { BuyOrderDetails } from '../components/buy-order/BuyOrderDetails';
+import { ProductionOrderDetails } from '../components/production-order/ProductionOrderDetails';
+import { getAllSuppliers } from '../api/supplier.api';
 
-function BuyOrderFormPage() {
+function ProductionOrderFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const [suppliers, setSuppliers] = useState([])
+
     const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
-        async function loadBuyOrder() {
+        async function loadProductionOrder() {
             if (params.id) {
-                const res = await getBuyOrder(params.id)
+                const res = await getProductionOrder(params.id)
                 setValue('title', res.data.Id)
                 setValue('description', res.data.description)
             }
-        }
-        loadBuyOrder()
+        };
+        loadProductionOrder()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onSubmit = handleSubmit(async data => {
         if (params.id) {
-            await updateBuyOrder(params.id, data)
-            toast.success('Orden de compra actualizada', {
+            await updateProductionOrder(params.id, data)
+            toast.success('Orden de producción actualizado', {
                 position: "bottom-right",
                 style: {
                     background: "#101010",
@@ -34,8 +37,8 @@ function BuyOrderFormPage() {
                 }
             })
         } else {
-            await createBuyOrder(data);
-            toast.success('Orden de compra creada', {
+            await createProductionOrder(data);
+            toast.success('Orden de producción creado', {
                 position: "bottom-right",
                 style: {
                     background: "#101010",
@@ -43,16 +46,24 @@ function BuyOrderFormPage() {
                 }
             })
         }
-        navigate('/buy-orders')
+        navigate('/production-orders')
     })
 
     return (
         <div className='max-w-5xl mx-auto'>
             <div className='col-span-2'>
-                <ComponentNavigationHeader listPath="/buy-orders" createPath="/buy-orders-create" title="Ordenes de compra" />
+                <ComponentNavigationHeader listPath="/production-orders" createPath="/production-orders-create" title="Orden de producción" />
             </div>
 
             <form action="" onSubmit={onSubmit}>
+                <input
+                    type="text"
+                    placeholder="Title"
+                    {...register("title", { required: true })}
+                    className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
+                />
+                {errors.title && <span>Campo requerido</span>}
+
                 <textarea
                     rows="3"
                     placeholder="Description"
@@ -70,8 +81,8 @@ function BuyOrderFormPage() {
                         onClick={async () => {
                             const accepted = window.confirm('Seguro de eliminar?');
                             if (accepted) {
-                                await deleteBuyOrder(params.id)
-                                toast.success('Orden de compra eliminada', {
+                                await deleteProductionOrder(params.id)
+                                toast.success('Orden de producción eliminada', {
                                     position: "bottom-right",
                                     style: {
                                         background: "#101010",
@@ -79,7 +90,7 @@ function BuyOrderFormPage() {
                                     }
                                 })
 
-                                navigate('/buy-orders')
+                                navigate('/production-orders')
                             }
                         }}
                     >
@@ -87,12 +98,11 @@ function BuyOrderFormPage() {
                     </button>
                 </div>
             }
-            {/* Veremos la tabla de ingredientes cuando estoy editando */}
             {params.id &&
-                <BuyOrderDetails buyOrderId={params.id}></BuyOrderDetails>
+                <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
             }
         </div>
     )
 }
 
-export default BuyOrderFormPage;
+export default ProductionOrderFormPage;
