@@ -57,7 +57,7 @@ export function ProductionOrderDetails({ productionOrderId }) {
 
     return (
         <div>
-            <h1 className="font-bold text-2xl mb-4 mt-4">Ingredientes</h1>
+            <h1 className="font-bold text-2xl mb-4 mt-4">Recetas</h1>
             <ProductionOrderDetailForm productionOrderId={productionOrderId} detailsChanged={loadProductionOrderDetails}></ProductionOrderDetailForm>
             <SorteableTable data={productionOrderDetails} config={config} keyFn={keyFn}></SorteableTable>
         </div>

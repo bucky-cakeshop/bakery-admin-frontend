@@ -21,3 +21,5 @@ export const deleteProductionOrder = (id) => productionOrderApi.delete(`/${id}`)
 export const updateProductionOrder = (id, productionOrder) => productionOrderApi.put(`/${id}/`, productionOrder)
 
 export const getProductionOrderDetails = (id) => productionOrderApi.get(`/${id}/get-details`)
+
+export const getProductionOrderIngredients = (id) => productionOrderApi.get(`/${id}/get-ingredients`)

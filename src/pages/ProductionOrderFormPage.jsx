@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 import { ProductionOrderDetails } from '../components/production-order/ProductionOrderDetails';
 import { getAllSuppliers } from '../api/supplier.api';
+import { ProductionOrderIngredients } from '../components/production-order/ProductionOrderIngredients';
 
 function ProductionOrderFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -99,7 +100,10 @@ function ProductionOrderFormPage() {
                 </div>
             }
             {params.id &&
-                <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
+                <div>
+                    <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
+                    <ProductionOrderIngredients productionOrderId={params.id}></ProductionOrderIngredients>
+                </div>
             }
         </div>
     )
