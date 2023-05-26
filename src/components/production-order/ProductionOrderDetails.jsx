@@ -5,6 +5,7 @@ import SorteableTable from '../sortable-table/SorteableTable'
 import { ProductionOrderDetailForm } from "./ProductionOrderDetailForm";
 import { GoTrashcan } from 'react-icons/go'
 import { toast } from 'react-hot-toast';
+import { ProductionOrderIngredients } from './ProductionOrderIngredients';
 
 export function ProductionOrderDetails({ productionOrderId }) {
     const [productionOrderDetails, setProductionOrderDetails] = useState([]);
@@ -60,6 +61,7 @@ export function ProductionOrderDetails({ productionOrderId }) {
             <h1 className="font-bold text-2xl mb-4 mt-4">Recetas</h1>
             <ProductionOrderDetailForm productionOrderId={productionOrderId} detailsChanged={loadProductionOrderDetails}></ProductionOrderDetailForm>
             <SorteableTable data={productionOrderDetails} config={config} keyFn={keyFn}></SorteableTable>
+            <ProductionOrderIngredients productionOrderId={productionOrderId} items={productionOrderDetails}></ProductionOrderIngredients>
         </div>
     )
 }

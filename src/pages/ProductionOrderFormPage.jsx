@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import { createProductionOrder, deleteProductionOrder, updateProductionOrder, getProductionOrder } from '../api/productionOrder.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 import { ProductionOrderDetails } from '../components/production-order/ProductionOrderDetails';
-import { getAllSuppliers } from '../api/supplier.api';
-import { ProductionOrderIngredients } from '../components/production-order/ProductionOrderIngredients';
 
 function ProductionOrderFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-    const [suppliers, setSuppliers] = useState([])
 
     const navigate = useNavigate();
     const params = useParams();
@@ -19,7 +16,7 @@ function ProductionOrderFormPage() {
         async function loadProductionOrder() {
             if (params.id) {
                 const res = await getProductionOrder(params.id)
-                setValue('title', res.data.Id)
+                setValue('title', res.data.title)
                 setValue('description', res.data.description)
             }
         };
@@ -100,10 +97,9 @@ function ProductionOrderFormPage() {
                 </div>
             }
             {params.id &&
-                <div>
-                    <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
-                    <ProductionOrderIngredients productionOrderId={params.id}></ProductionOrderIngredients>
-                </div>
+
+                <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
+
             }
         </div>
     )

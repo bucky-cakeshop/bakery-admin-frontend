@@ -11,7 +11,7 @@ export function ProductionOrderCard({ productionOrder }) {
                 navigate(`/production-orders/${productionOrder.id}`)
             }}
         >
-            <h1 className='font-bold uppercase'>{productionOrder.id}</h1>
+            <h1 className='font-bold uppercase'>{productionOrder.title}</h1>
             <p className='text-black-400'>{productionOrder.description}</p>
         </div>
     );

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getProductionOrderIngredients } from '../../api/productionOrder.api'
 import SorteableTable from '../sortable-table/SorteableTable'
 
-export function ProductionOrderIngredients({ productionOrderId }) {
+export function ProductionOrderIngredients({ productionOrderId, items }) {
     const [productionOrderIngredients, setProductionOrderIngredients] = useState([]);
 
     async function loadProductionOrderIngredients() {
@@ -11,19 +11,31 @@ export function ProductionOrderIngredients({ productionOrderId }) {
     }
     useEffect(() => {
         loadProductionOrderIngredients();
-    }, [])
+    }, [items])
 
     const config = [
         {
             label: 'Ingrediente',
-            render: (productionOrder) => productionOrder.ingredient_object.name,
+            render: (productionOrder) => productionOrder.ingredient + ' - ' + productionOrder.ingredient_object.name,
             sortValue: (productionOrder) => productionOrder.ingredient_object.name
         },
         {
             label: 'Cantidad',
             render: (productionOrder) => productionOrder.quantity,
             sortValue: (productionOrder) => productionOrder.quantity
+        },
+        {
+            label: 'Unidad',
+            render: (productionOrder) => productionOrder.measureUnit_object.symbol,
+            sortValue: (productionOrder) => productionOrder.measureUnit_object.symbol
+        },
+        {
+            label: 'Recetas',
+            render: (productionOrder) => productionOrder.recipe_object.name,
         }
+
+
+
     ];
 
     const keyFn = (productionOrder) => {
