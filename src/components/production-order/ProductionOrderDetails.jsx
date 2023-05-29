@@ -5,7 +5,7 @@ import SorteableTable from '../sortable-table/SorteableTable'
 import { ProductionOrderDetailForm } from "./ProductionOrderDetailForm";
 import { GoTrashcan } from 'react-icons/go'
 import { toast } from 'react-hot-toast';
-import { ProductionOrderIngredients } from './ProductionOrderIngredients';
+import { ProductionOrderAggregatedIngredients } from './ProductionOrderAggregatedIngredients';
 
 export function ProductionOrderDetails({ productionOrderId }) {
     const [productionOrderDetails, setProductionOrderDetails] = useState([]);
@@ -57,11 +57,19 @@ export function ProductionOrderDetails({ productionOrderId }) {
     }
 
     return (
-        <div>
-            <h1 className="font-bold text-2xl mb-4 mt-4">Recetas</h1>
-            <ProductionOrderDetailForm productionOrderId={productionOrderId} detailsChanged={loadProductionOrderDetails}></ProductionOrderDetailForm>
-            <SorteableTable data={productionOrderDetails} config={config} keyFn={keyFn}></SorteableTable>
-            <ProductionOrderIngredients productionOrderId={productionOrderId} items={productionOrderDetails}></ProductionOrderIngredients>
+        <div className="max-w-5xl mx-auto grid grid-cols-2">
+            <h1 className="font-bold text-2xl mb-4 mt-4 col-span-2">Recetas</h1>
+            <div className='col-span-2'>
+                <ProductionOrderDetailForm productionOrderId={productionOrderId} detailsChanged={loadProductionOrderDetails}></ProductionOrderDetailForm>
+            </div>
+            <div className="">
+                <h1 className="font-bold text-xl mb-1 mt-4">Detalle de la orden de producción</h1>
+                <SorteableTable data={productionOrderDetails} config={config} keyFn={keyFn}></SorteableTable>
+            </div>
+            <div className="">
+                <ProductionOrderAggregatedIngredients productionOrderId={productionOrderId} items={productionOrderDetails}></ProductionOrderAggregatedIngredients>
+            </div>
+
         </div>
     )
 }

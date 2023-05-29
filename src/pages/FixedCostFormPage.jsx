@@ -96,7 +96,6 @@ function FixedCostFormPage() {
             </form>
 
             <button className=' bg-indigo-500 p-3 rounded-lg block w-full col-span-2' onClick={handleSave} >Guardar</button>
-
             {params.id &&
                 <div className='flex justify-end'>
                     <button

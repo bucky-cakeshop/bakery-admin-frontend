@@ -50,7 +50,7 @@ export function ProductionOrderDetailForm({ productionOrderId, detailsChanged })
 
     return (
         <div>
-            <form action="" onSubmit={onSubmit} className='grid grid-cols-3 gap-2 mb-5 grid-rows-2'>
+            <form action="" onSubmit={onSubmit} className='grid grid-cols-3 gap-2 mb-5'>
                 <select
                     name="recipe"
                     placeholder="recetas"

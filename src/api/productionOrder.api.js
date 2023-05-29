@@ -23,3 +23,5 @@ export const updateProductionOrder = (id, productionOrder) => productionOrderApi
 export const getProductionOrderDetails = (id) => productionOrderApi.get(`/${id}/get-details`)
 
 export const getProductionOrderIngredients = (id) => productionOrderApi.get(`/${id}/get-ingredients`)
+
+export const getProductionOrderAggregatedIngredients = (id) => productionOrderApi.get(`/${id}/get-aggregated-ingredients`)

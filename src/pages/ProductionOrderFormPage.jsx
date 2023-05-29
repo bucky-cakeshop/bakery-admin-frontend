@@ -24,7 +24,7 @@ function ProductionOrderFormPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onSubmit = handleSubmit(async data => {
+    const handleSave = handleSubmit(async data => {
         if (params.id) {
             await updateProductionOrder(params.id, data)
             toast.success('Orden de producción actualizado', {
@@ -47,61 +47,68 @@ function ProductionOrderFormPage() {
         navigate('/production-orders')
     })
 
+    const handleDelete = (async () => {
+        const accepted = window.confirm('Seguro de eliminar?');
+        if (accepted) {
+            await deleteProductionOrder(params.id)
+            toast.success('Orden de producción eliminada', {
+                position: "bottom-right",
+                style: {
+                    background: "#101010",
+                    color: "#fff"
+                }
+            })
+
+            navigate('/production-orders')
+        }
+
+    })
+
     return (
-        <div className='max-w-5xl mx-auto'>
-            <div className='col-span-2'>
-                <ComponentNavigationHeader listPath="/production-orders" createPath="/production-orders-create" title="Orden de producción" />
-            </div>
-
-            <form action="" onSubmit={onSubmit}>
-                <input
-                    type="text"
-                    placeholder="Title"
-                    {...register("title", { required: true })}
-                    className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
-                />
-                {errors.title && <span>Campo requerido</span>}
-
-                <textarea
-                    rows="3"
-                    placeholder="Description"
-                    {...register("description", { required: true })}
-                    className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
-                />
-                {errors.description && <span>Campo requerido</span>}
-
-                <button className=' bg-indigo-500 p-3 rounded-lg block w-full mt-3'>Guardar</button>
-            </form>
-            {params.id &&
-                <div className=' flex justify-end'>
-                    <button
-                        className=' bg-red-500 p-3 rounded-lg w-48 mt-3'
-                        onClick={async () => {
-                            const accepted = window.confirm('Seguro de eliminar?');
-                            if (accepted) {
-                                await deleteProductionOrder(params.id)
-                                toast.success('Orden de producción eliminada', {
-                                    position: "bottom-right",
-                                    style: {
-                                        background: "#101010",
-                                        color: "#fff"
-                                    }
-                                })
-
-                                navigate('/production-orders')
-                            }
-                        }}
-                    >
-                        Eliminar
-                    </button>
+        <div>
+            <div className='max-w-5xl mx-auto grid grid-cols-3'>
+                <div className='col-span-3'>
+                    <ComponentNavigationHeader listPath="/production-orders" createPath="/production-orders-create" title="Orden de producción" />
                 </div>
-            }
-            {params.id &&
 
-                <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
+                <form action="" className='col-span-3'>
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        {...register("title", { required: true })}
+                        className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
+                    />
+                    {errors.title && <span>Campo requerido</span>}
 
-            }
+                    <textarea
+                        rows="3"
+                        placeholder="Description"
+                        {...register("description", { required: true })}
+                        className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
+                    />
+                    {errors.description && <span>Campo requerido</span>}
+                </form>
+
+                <button className=' bg-indigo-500 p-3 rounded-lg block w-full col-span-2' onClick={handleSave}>Guardar</button>
+                {params.id &&
+                    <div className='flex justify-end'>
+                        <button
+                            className=' bg-red-500 p-3 rounded-lg w-full ml-2'
+                            onClick={handleDelete}
+                        >
+                            Eliminar
+                        </button>
+                    </div>
+                }
+            </div>
+            <div>
+                {params.id &&
+                    <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
+                }
+            </div>
         </div>
+
+
     )
 }
 
