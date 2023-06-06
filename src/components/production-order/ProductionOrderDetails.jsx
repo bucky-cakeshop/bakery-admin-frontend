@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProductionOrderDetails } from '../../api/productionOrder.api'
+import { getProductionOrderDetails, getProductionOrder } from '../../api/productionOrder.api'
 import { deleteProductionOrderDetail } from '../../api/productionOrderDetail.api'
 import SorteableTable from '../sortable-table/SorteableTable'
 import { ProductionOrderDetailForm } from "./ProductionOrderDetailForm";
@@ -9,13 +9,20 @@ import { ProductionOrderAggregatedIngredients } from './ProductionOrderAggregate
 
 export function ProductionOrderDetails({ productionOrderId }) {
     const [productionOrderDetails, setProductionOrderDetails] = useState([]);
+    const [productionOrder, setProductionOrder] = useState({});
 
     async function loadProductionOrderDetails() {
         const res = await getProductionOrderDetails(productionOrderId);
         setProductionOrderDetails([...res.data]);
     }
+    async function loadProductionOrder() {
+        const res = await getProductionOrder(productionOrderId);
+        setProductionOrder({ ...res.data });
+    }
+
     useEffect(() => {
         loadProductionOrderDetails();
+        loadProductionOrder();
     }, [])
 
     async function removeItem(productionOrder) {
@@ -57,8 +64,8 @@ export function ProductionOrderDetails({ productionOrderId }) {
     }
 
     return (
-        <div className="max-w-5xl mx-auto grid grid-cols-2">
-            <h1 className="font-bold text-2xl mb-4 mt-4 col-span-2">Recetas</h1>
+        <div className="mx-auto grid grid-cols-2">
+            <h1 className="font-bold text-2xl mb-4 mt-4 col-span-2">Detalles de la orden de producción - Recetas</h1>
             <div className='col-span-2'>
                 <ProductionOrderDetailForm productionOrderId={productionOrderId} detailsChanged={loadProductionOrderDetails}></ProductionOrderDetailForm>
             </div>

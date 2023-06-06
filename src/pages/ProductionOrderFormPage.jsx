@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 import { ProductionOrderDetails } from '../components/production-order/ProductionOrderDetails';
+import { ProductionOrderActions } from '../components/production-order/ProductionOrderActions';
 
 function ProductionOrderFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -66,7 +67,7 @@ function ProductionOrderFormPage() {
 
     return (
         <div>
-            <div className='max-w-5xl mx-auto grid grid-cols-3'>
+            <div className='mx-auto grid grid-cols-3 gap-x-2'>
                 <div className='col-span-3'>
                     <ComponentNavigationHeader listPath="/production-orders" createPath="/production-orders-create" title="Orden de producción" />
                 </div>
@@ -89,16 +90,21 @@ function ProductionOrderFormPage() {
                     {errors.description && <span>Campo requerido</span>}
                 </form>
 
-                <button className=' bg-indigo-500 p-3 rounded-lg block w-full col-span-2' onClick={handleSave}>Guardar</button>
+                <button className=' bg-blue-400 p-3 rounded-lg block w-full col-span-2 hover:bg-blue-500' onClick={handleSave}>Guardar</button>
                 {params.id &&
                     <div className='flex justify-end'>
                         <button
-                            className=' bg-red-500 p-3 rounded-lg w-full ml-2'
+                            className=' bg-red-400 p-3 rounded-lg w-full hover:bg-red-500'
                             onClick={handleDelete}
                         >
                             Eliminar
                         </button>
                     </div>
+                }
+            </div>
+            <div>
+                {params.id &&
+                    <ProductionOrderActions productionOrderId={params.id}></ProductionOrderActions>
                 }
             </div>
             <div>
