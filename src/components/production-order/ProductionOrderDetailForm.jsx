@@ -33,7 +33,6 @@ export function ProductionOrderDetailForm({ productionOrderId, detailsChanged })
                 recipe: parseInt(data.recipe),
                 quantity: parseFloat(data.quantity),
             }
-            console.log(payload)
             await createProductionOrderDetail(payload)
             toast.success('Se ha creado el item de la orden de producción', {
                 position: "bottom-right",
