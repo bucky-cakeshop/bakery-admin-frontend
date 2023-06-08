@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { createProductionOrder, deleteProductionOrder, updateProductionOrder, getProductionOrder } from '../api/productionOrder.api';
 import { useNavigate, useParams } from 'react-router-dom'
@@ -6,21 +6,28 @@ import { toast } from 'react-hot-toast';
 import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
 import { ProductionOrderDetails } from '../components/production-order/ProductionOrderDetails';
 import { ProductionOrderActions } from '../components/production-order/ProductionOrderActions';
+import { canUpdateOrDeleteProductionOrder } from '../services/productionOrders/productionOrderServices';
+
 
 function ProductionOrderFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const [productionOrder, setProductionOrder] = useState({});
+    const [updateState, setUpdateState] = useState(false);
 
     const navigate = useNavigate();
     const params = useParams();
 
+    async function loadProductionOrder() {
+        if (params.id) {
+            const res = await getProductionOrder(params.id)
+            setValue('title', res.data.title)
+            setValue('description', res.data.description)
+            setProductionOrder(res.data)
+            setUpdateState(!updateState)
+        }
+    };
+
     useEffect(() => {
-        async function loadProductionOrder() {
-            if (params.id) {
-                const res = await getProductionOrder(params.id)
-                setValue('title', res.data.title)
-                setValue('description', res.data.description)
-            }
-        };
         loadProductionOrder()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -91,7 +98,7 @@ function ProductionOrderFormPage() {
                 </form>
 
                 <button className=' bg-blue-400 p-3 rounded-lg block w-full col-span-2 hover:bg-blue-500' onClick={handleSave}>Guardar</button>
-                {params.id &&
+                {params.id && canUpdateOrDeleteProductionOrder(productionOrder) &&
                     <div className='flex justify-end'>
                         <button
                             className=' bg-red-400 p-3 rounded-lg w-full hover:bg-red-500'
@@ -104,12 +111,12 @@ function ProductionOrderFormPage() {
             </div>
             <div>
                 {params.id &&
-                    <ProductionOrderActions productionOrderId={params.id}></ProductionOrderActions>
+                    <ProductionOrderActions productionOrderId={params.id} refresh={loadProductionOrder}></ProductionOrderActions>
                 }
             </div>
             <div>
                 {params.id &&
-                    <ProductionOrderDetails productionOrderId={params.id}></ProductionOrderDetails>
+                    <ProductionOrderDetails productionOrderId={params.id} shouldUpdateState={updateState}></ProductionOrderDetails>
                 }
             </div>
         </div>
