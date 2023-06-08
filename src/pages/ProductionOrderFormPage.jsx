@@ -116,7 +116,7 @@ function ProductionOrderFormPage() {
             </div>
             <div>
                 {params.id &&
-                    <ProductionOrderDetails productionOrderId={params.id} shouldUpdateState={updateState}></ProductionOrderDetails>
+                    <ProductionOrderDetails productionOrderId={params.id} shouldUpdateState={canUpdateOrDeleteProductionOrder(productionOrder)}></ProductionOrderDetails>
                 }
             </div>
         </div>

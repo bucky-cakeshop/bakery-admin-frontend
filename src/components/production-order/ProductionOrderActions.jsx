@@ -31,18 +31,21 @@ export function ProductionOrderActions({ productionOrderId, refresh }) {
         const response = await startProductionOrder(productionOrderId)
         processResponse(response)
         loadProductionOrder()
+        loadProductionOrderConsumes()
         refresh()
     })
     const cancel = (async () => {
         const response = await cancelProductionOrder(productionOrderId)
         processResponse(response)
         loadProductionOrder()
+        loadProductionOrderConsumes()
         refresh()
     })
     const close = (async () => {
         const response = await closeProductionOrder(productionOrderId)
         processResponse(response)
         loadProductionOrder()
+        loadProductionOrderConsumes()
         refresh()
     })
 

@@ -6,12 +6,10 @@ import { ProductionOrderDetailForm } from "./ProductionOrderDetailForm";
 import { GoTrashcan } from 'react-icons/go'
 import { toast } from 'react-hot-toast';
 import { ProductionOrderAggregatedIngredients } from './ProductionOrderAggregatedIngredients';
-import { canUpdateOrDeleteProductionOrder } from "../../services/productionOrders/productionOrderServices";
 
 export function ProductionOrderDetails({ productionOrderId, shouldUpdateState }) {
     const [productionOrderDetails, setProductionOrderDetails] = useState([]);
     const [productionOrder, setProductionOrder] = useState({});
-    const [updateState, setUpdateState] = useState(false);
 
     async function loadProductionOrderDetails() {
         const res = await getProductionOrderDetails(productionOrderId);
@@ -25,11 +23,10 @@ export function ProductionOrderDetails({ productionOrderId, shouldUpdateState })
     useEffect(() => {
         loadProductionOrderDetails();
         loadProductionOrder();
-        setUpdateState(shouldUpdateState)
     }, [])
 
     async function removeItem(productionOrder) {
-        if (!canUpdateOrDeleteProductionOrder(productionOrder)) {
+        if (!shouldUpdateState) {
             toast.error('No es posible eliminar una receta cuando la orden de compra iniciada o cerrada.', {
                 position: "bottom-right",
                 style: {
@@ -67,7 +64,7 @@ export function ProductionOrderDetails({ productionOrderId, shouldUpdateState })
         {
             label: 'Eliminar',
             render: (productionOrderDetail) => {
-                if (canUpdateOrDeleteProductionOrder(productionOrder)) {
+                if (shouldUpdateState) {
                     return <button className=" w-10"
                         onClick={() => removeItem(productionOrderDetail.id)} ><GoTrashcan /></button>
                 }
@@ -84,7 +81,7 @@ export function ProductionOrderDetails({ productionOrderId, shouldUpdateState })
         <div className="mx-auto grid grid-cols-2">
             <h1 className="font-bold text-2xl mb-4 mt-4 col-span-2">Detalles de la orden de producción - Recetas</h1>
             <div className='col-span-2'>
-                {canUpdateOrDeleteProductionOrder(productionOrder) &&
+                {shouldUpdateState &&
                     <ProductionOrderDetailForm productionOrderId={productionOrderId} detailsChanged={loadProductionOrderDetails}></ProductionOrderDetailForm>
                 }
 
