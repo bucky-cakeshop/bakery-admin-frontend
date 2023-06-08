@@ -29,3 +29,5 @@ export const getProductionOrderAggregatedIngredients = (id) => productionOrderAp
 export const startProductionOrder = (id) => productionOrderApi.get(`/${id}/start`).catch((error) => {return error.response})
 export const cancelProductionOrder = (id) => productionOrderApi.get(`/${id}/cancel`).catch((error) => {return error.response})
 export const closeProductionOrder = (id) => productionOrderApi.get(`/${id}/close`).catch((error) => {return error.response})
+
+export const getProductionOrderConsumes = (id) => productionOrderApi.get(`/${id}/consumes`)

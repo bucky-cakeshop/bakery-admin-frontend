@@ -1,18 +1,27 @@
-import { getProductionOrder, startProductionOrder, cancelProductionOrder, closeProductionOrder } from '../../api/productionOrder.api'
+import { getProductionOrder, startProductionOrder, cancelProductionOrder, closeProductionOrder, getProductionOrderConsumes } from '../../api/productionOrder.api'
 import { useEffect, useState } from "react";
 import { toast } from 'react-hot-toast';
+import SorteableTable from '../sortable-table/SorteableTable'
 
 export function ProductionOrderActions({ productionOrderId }) {
     const [productionOrder, setProductionOrder] = useState({});
+    const [productionOrderConsumes, setProductionOrderConsumes] = useState({});
 
     async function loadProductionOrder() {
         const res = await getProductionOrder(productionOrderId);
         
         setProductionOrder({ ...res.data });
     }
+
+    async function loadProductionOrderConsumes() {
+        const res = await getProductionOrderConsumes(productionOrderId);
+        setProductionOrderConsumes([...res.data]);
+    }
+
     useEffect(() => {
         loadProductionOrder();
-        
+        loadProductionOrderConsumes()
+        console.log(productionOrderConsumes)
     }, [])
     
     const activeClass = "bg-green-400 p-3 rounded-lg block w-full hover:bg-green-500 mt-3"
@@ -75,6 +84,41 @@ export function ProductionOrderActions({ productionOrderId }) {
         }
     })
 
+    const config = [
+        {
+            label: 'Ingrediente',
+            render: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.ingredient_object.name,
+            sortValue: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.ingredient_object.name
+        },
+        {
+            label: 'Unidad',
+            render: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.measureUnit_object.symbol,
+            sortValue: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.measureUnit_object.symbol
+        },
+        {
+            label: 'Lote',
+            render: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.batch,
+            sortValue: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.batch
+        },
+        {
+            label: 'Exp.',
+            render: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.expirationDate,
+            sortValue: (productionOrderConsume) => productionOrderConsume.supplierInvoiceDetail.expirationDate
+        },
+
+        {
+            label: 'Consumido',
+            render: (productionOrderConsume) => productionOrderConsume.quantity,
+            sortValue: (productionOrderConsume) => productionOrderConsume.quantity
+        }
+
+
+    ];
+
+    const keyFn = (productionOrderConsume) => {
+        return productionOrderConsume.id;
+    }
+
     return (
         <div>
             <div className="mx-auto grid grid-cols-3 gap-x-2">
@@ -100,6 +144,11 @@ export function ProductionOrderActions({ productionOrderId }) {
                     Cerrar
                 </button>
             </div>
+            <div className="">
+                <h1 className="font-bold text-xl mb-1 mt-4">Detalle de los consumos de stock</h1>
+                <SorteableTable data={productionOrderConsumes} config={config} keyFn={keyFn}></SorteableTable>
+            </div>
+
         </div>
     )
 }
