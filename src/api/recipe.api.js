@@ -21,3 +21,5 @@ export const deleteRecipe = (id) => recipeApi.delete(`/${id}`)
 export const updateRecipe = (id, recipe) => recipeApi.put(`/${id}/`, recipe)
 
 export const getRecipeDetails = (id) => recipeApi.get(`/${id}/get-details`)
+
+export const getAvailableRecipes = () => recipeApi.get('/available-recipes')

@@ -17,6 +17,8 @@ import SupplierInvoicePage from './pages/SupplierInvoicePage';
 import SupplierInvoiceFormPage from './pages/SupplierInvoiceFormPage';
 import ProductionOrderPage from './pages/ProductionOrderPage';
 import ProductionOrderFormPage from './pages/ProductionOrderFormPage';
+import ProductPage from './pages/product/ProductPage';
+import ProductFormPage from './pages/product/ProductFormPage';
 
 
 import { Toaster } from 'react-hot-toast'
@@ -65,6 +67,10 @@ function App() {
                         <Route path='/production-orders' element={<ProductionOrderPage />} />
                         <Route path='/production-orders-create' element={<ProductionOrderFormPage />} />
                         <Route path='/production-orders/:id' element={<ProductionOrderFormPage />} />
+
+                        <Route path='/products' element={<ProductPage />} />
+                        <Route path='/products-create' element={<ProductFormPage />} />
+                        <Route path='/products/:id' element={<ProductFormPage />} />
 
                     </Routes>
                     <Toaster />

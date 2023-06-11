@@ -15,6 +15,7 @@ function Sidebar() {
         { label: 'Ingredientes', path: "/ingredients" },
         { label: 'Proveedores', path: "/suppliers" },
         { label: 'Recetas', path: "/recipes" },
+        { label: 'Productos', path: "/products" },
         { label: 'C. de proveedores', path: "/supplier-invoice" },
         { label: 'O. de producción', path: "/production-orders" },
     ];
