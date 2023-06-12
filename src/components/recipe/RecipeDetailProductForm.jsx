@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
-import { getAllIngredients } from '../../api/ingredient.api';
+import { getAllProducts } from '../../api/product.api';
 import { getAllMeasureUnits } from '../../api/measureUnit.api';
-import { createRecipeDetail } from '../../api/recipeDetail.api';
+import { createRecipeDetailProduct } from '../../api/recipeDetailProduct.api';
 
-export function RecipeDetailForm({ recipeId, detailsChanged }) {
+export function RecipeDetailProductForm({ recipeId, detailsChanged }) {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
     const [measureUnits, setMeasureUnits] = useState([])
@@ -16,12 +16,12 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
             const res = await getAllMeasureUnits()
             setMeasureUnits(res.data)
         }
-        async function loadIngredients() {
-            const res = await getAllIngredients()
+        async function loadProducts() {
+            const res = await getAllProducts()
             setIngredients(res.data)
         }
 
-        loadIngredients()
+        loadProducts()
         loadMeasureUnits()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -31,7 +31,7 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
             <option key={option.id} value={option.id}>{option.title}</option>
         ));
     }
-    const renderIngredientOptions = () => {
+    const renderProductOptions = () => {
         return ingredients.map((option, index) => (
             <option key={option.id} value={option.id}>{option.name}</option>
         ));
@@ -40,12 +40,12 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
     const onSubmit = handleSubmit(async data => {
         if (recipeId) {
             const payload = {
-                ingredient: parseInt(data.ingredient),
+                product: parseInt(data.product),
                 measureUnit: parseInt(data.measureUnit),
                 quantity: parseFloat(data.quantity),
                 recipe: parseInt(recipeId)
             }
-            await createRecipeDetail(payload)
+            await createRecipeDetailProduct(payload)
             toast.success('Se ha creado el item de la receta', {
                 position: "bottom-right",
                 style: {
@@ -54,7 +54,7 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
                 }
             })
             detailsChanged()
-            setValue('ingredient',0)
+            setValue('product',0)
             setValue('measureUnit',0)
             setValue('quantity','')
         }
@@ -64,13 +64,13 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
         <div>
             <form action="" onSubmit={onSubmit} className='grid grid-cols-4 gap-2 mb-5'>
                     <select
-                        name="ingredient"
-                        placeholder="Ingrediente"
-                        {...register("ingredient", { required: true })}
+                        name="product"
+                        placeholder="Product"
+                        {...register("product", { required: true })}
                         className=' bg-blue-100 p-3 rounded-lg'
                     >
                         <option value="">Seleccionar</option>
-                        {renderIngredientOptions()}
+                        {renderProductOptions()}
                     </select>
 
                     <select
@@ -91,14 +91,10 @@ export function RecipeDetailForm({ recipeId, detailsChanged }) {
                     />
                 <button className=' bg-blue-400 rounded-lg'>Agregar</button>
 
-                {errors.ingredient && <span className='font-bold text-red-500'>Ingrediente es requerido</span>}
+                {errors.product && <span className='font-bold text-red-500'>Producto es requerido</span>}
                 {errors.measureUnit && <span className='font-bold text-red-500'>Unidad de medida es requerido</span>}
                 {errors.quantity && <span className='font-bold text-red-500'>Cantidad es requerido</span>}
-
-
             </form>
-
         </div>
     )
-
 }

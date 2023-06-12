@@ -22,4 +22,6 @@ export const updateRecipe = (id, recipe) => recipeApi.put(`/${id}/`, recipe)
 
 export const getRecipeDetails = (id) => recipeApi.get(`/${id}/get-details`)
 
+export const getRecipeDetailsProducts = (id) => recipeApi.get(`/${id}/get-details-products`)
+
 export const getAvailableRecipes = () => recipeApi.get('/available-recipes')
