@@ -10,7 +10,7 @@ const recipeApi = axios.create({
     baseURL: `${URL}/bakeryAdmin/api/v1/recipe-detail-product`
 })
 
-export const createRecipeDetailProduct = (recipeDetailProduct) => recipeApi.post('/', recipeDetailProduct)
+export const createRecipeDetailProduct = (recipeDetailProduct) => recipeApi.post('/', recipeDetailProduct).catch((error) => {return error.response})
 
 export const deleteRecipeDetailProduct = (id) => recipeApi.delete(`/${id}`)
 

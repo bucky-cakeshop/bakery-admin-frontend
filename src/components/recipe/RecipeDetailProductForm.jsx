@@ -45,14 +45,27 @@ export function RecipeDetailProductForm({ recipeId, detailsChanged }) {
                 quantity: parseFloat(data.quantity),
                 recipe: parseInt(recipeId)
             }
-            await createRecipeDetailProduct(payload)
-            toast.success('Se ha creado el item de la receta', {
-                position: "bottom-right",
-                style: {
-                    background: "#101010",
-                    color: "#fff"
-                }
-            })
+            var response = await createRecipeDetailProduct(payload)
+            if(response.status === 400){
+                toast.error('Error: No es posible agregar el producto como parte de la receta ya que es producido por la misma receta', {
+                    position: "bottom-right",
+                    style: {
+                        background: "#101010",
+                        color: "#fff"
+                    }
+                })
+                return
+
+            } else {
+                toast.success('Se ha creado el item de la receta', {
+                    position: "bottom-right",
+                    style: {
+                        background: "#101010",
+                        color: "#fff"
+                    }
+                
+                })
+            }      
             detailsChanged()
             setValue('product',0)
             setValue('measureUnit',0)

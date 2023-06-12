@@ -11,6 +11,7 @@ function ProductFormPage() {
     const navigate = useNavigate();
     const params = useParams();
     const [recipes, setRecipes] = useState([])
+    const [product, setProduct] = useState({})
 
     useEffect(() => {
         async function loadProduct() {
@@ -21,6 +22,7 @@ function ProductFormPage() {
                 setValue('recipe',res.data.recipe)
                 setValue('quantityByRecipe',res.data.quantityByRecipe)
                 setValue('isForSell',res.data.isForSell)
+                setProduct(res.data)
             }
         }
         async function loadAvailableRecipes() {
@@ -33,6 +35,7 @@ function ProductFormPage() {
     }, []);
 
     const renderRecipeOptions = () => {
+        
         return recipes.map((option, index) => (
             <option key={option.id} value={option.id}>{option.title}</option>
         ));
@@ -77,6 +80,27 @@ function ProductFormPage() {
         }
 
     })
+    const renderRecipe = (()=>{
+        if(!params.id) {
+            return (
+                <select
+                name="recipe"
+                placeholder="Receta"
+                {...register("recipe", { required: true })}
+                className=' bg-blue-100 p-3 rounded-lg w-full mb-3'
+            >
+                <option value="">Seleccionar</option>
+                {renderRecipeOptions()}
+                disabled
+            </select>
+            )
+        }else{
+            return (
+                product.recipe_object &&
+                <h1 className="p-3 rounded-lg w-full mb-3">Este producto es generado por la receta: <b>{product.recipe_object.title}</b></h1>
+            )
+        }
+    })
 
     return (
         <div className='mx-auto grid grid-cols-3 gap-x-2'>
@@ -101,15 +125,8 @@ function ProductFormPage() {
                 />
                 {errors.description && <span>Campo requerido</span>}
 
-                <select
-                        name="recipe"
-                        placeholder="Receta"
-                        {...register("recipe", { required: true })}
-                        className=' bg-blue-100 p-3 rounded-lg w-full mb-3'
-                    >
-                        <option value="">Seleccionar</option>
-                        {renderRecipeOptions()}
-                    </select>
+                {renderRecipe()}
+
                 <input
                     type="text"
                     placeholder="Cantidad por receta"
