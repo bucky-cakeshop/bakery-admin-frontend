@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { createRecipe, deleteRecipe, updateRecipe, getRecipe } from '../api/recipe.api';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
-import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
-import { RecipeDetails } from '../components/recipe/RecipeDetails';
+import { ComponentNavigationHeader } from '../../components/ComponentNavigationHeader';
+import { RecipeDetails } from '../../components/recipe/RecipeDetails';
+import { createRecipe, deleteRecipe, updateRecipe, getRecipe } from '../../api/recipe.api';
 
 function RecipeFormPage() {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -23,7 +23,7 @@ function RecipeFormPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onSubmit = handleSubmit(async data => {
+    const handleSave = handleSubmit(async data => {
         if (params.id) {
             await updateRecipe(params.id, data)
             toast.success('Receta actualizada', {
@@ -47,12 +47,12 @@ function RecipeFormPage() {
     })
 
     return (
-        <div className='max-w-5xl mx-auto'>
-            <div className='col-span-2'>
+        <div className='mx-auto grid grid-cols-3 gap-x-2'>
+            <div className='col-span-3'>
                 <ComponentNavigationHeader listPath="/recipes" createPath="/recipes-create" title="Recetas" />
             </div>
 
-            <form action="" onSubmit={onSubmit}>
+            <form action="" className='col-span-3'>
                 <input
                     type="text"
                     placeholder="Title"
@@ -67,14 +67,14 @@ function RecipeFormPage() {
                     {...register("description", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
                 />
-                {errors.description && <span>Campo requerido</span>}
-
-                <button className=' bg-indigo-500 p-3 rounded-lg block w-full mt-3'>Guardar</button>
+                {errors.description && <span>Campo requerido</span>}             
             </form>
+
+            <button className=' bg-blue-400 p-3 rounded-lg block w-full col-span-2 hover:bg-blue-500' onClick={handleSave}>Guardar</button>
             {params.id &&
                 <div className=' flex justify-end'>
                     <button
-                        className=' bg-red-500 p-3 rounded-lg w-48 mt-3'
+                        className=' bg-red-400 p-3 rounded-lg w-full hover:bg-red-500'
                         onClick={async () => {
                             const accepted = window.confirm('Seguro de eliminar?');
                             if (accepted) {
@@ -97,7 +97,9 @@ function RecipeFormPage() {
             }
             {/* Veremos la tabla de ingredientes cuando estoy editando */}
             {params.id &&
-                <RecipeDetails recipeId={params.id}></RecipeDetails>
+                <div className='col-span-3'>
+                    <RecipeDetails recipeId={params.id}></RecipeDetails>
+                </div>
             }
         </div>
     )

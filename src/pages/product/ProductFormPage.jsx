@@ -80,24 +80,24 @@ function ProductFormPage() {
         }
 
     })
+
     const renderRecipe = (()=>{
         if(!params.id) {
             return (
                 <select
                 name="recipe"
                 placeholder="Receta"
-                {...register("recipe", { required: true })}
+                {...register("recipe", { required: false })}
                 className=' bg-blue-100 p-3 rounded-lg w-full mb-3'
             >
                 <option value="">Seleccionar</option>
                 {renderRecipeOptions()}
-                disabled
             </select>
             )
         }else{
             return (
                 product.recipe_object &&
-                <h1 className="p-3 rounded-lg w-full mb-3">Este producto es generado por la receta: <b>{product.recipe_object.title}</b></h1>
+                <h1 className="p-3 rounded-lg w-full mb-3 col-span-3">Este producto es generado por la receta: <b>{product.recipe_object.title}</b></h1>
             )
         }
     })
@@ -109,6 +109,7 @@ function ProductFormPage() {
             </div>
 
             <form action="" className='col-span-3'>
+                {renderRecipe()}
                 <input
                     type="text"
                     placeholder="Nombre"
@@ -125,8 +126,6 @@ function ProductFormPage() {
                 />
                 {errors.description && <span>Campo requerido</span>}
 
-                {renderRecipe()}
-
                 <input
                     type="text"
                     placeholder="Cantidad por receta"
@@ -137,7 +136,7 @@ function ProductFormPage() {
                 <input
                     type="checkbox"
                     placeholder="es para venta"
-                    {...register("isForSell", { required: true })}
+                    {...register("isForSell", { required: false })}
                     className=' bg-blue-100 p-3 rounded-lg ml-3 mb-3'
                 />
             </form>

@@ -1,5 +1,5 @@
-import RecipeList from '../components/recipe/RecipeList'
-import { ComponentNavigationHeader } from '../components/ComponentNavigationHeader';
+import RecipeList from '../../components/recipe/RecipeList'
+import { ComponentNavigationHeader } from '../../components/ComponentNavigationHeader';
 
 function RecipePage() {
     return(
