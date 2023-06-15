@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { toast } from 'react-hot-toast';
 import SorteableTable from '../sortable-table/SorteableTable'
 import { getButtonsState } from '../../services/productionOrders/productionOrderServices';
+import Modal from '../Modal';
 
 export function ProductionOrderActions({ productionOrderId, refresh }) {
     const [productionOrder, setProductionOrder] = useState({});
     const [productionOrderConsumes, setProductionOrderConsumes] = useState([]);
+    const [showModal, setShowModal] = useState(false)
+
 
     async function loadProductionOrder() {
         const res = await getProductionOrder(productionOrderId);
@@ -27,6 +30,19 @@ export function ProductionOrderActions({ productionOrderId, refresh }) {
     const activeClass = "bg-green-400 p-3 rounded-lg block w-full hover:bg-green-500 mt-3"
     const inactiveClass = "bg-gray-400 p-3 rounded-lg block w-full mt-3"
     
+    const handleClose = () => {
+        setShowModal(false);
+    };
+    const actionBar = <div>
+        <button className=' bg-blue-400 rounded-lg w-10' onClick={handleClose} primary>I Accept</button>
+    </div>
+
+    const modal = <Modal onClose={handleClose} actionBar={actionBar}>
+        <p>
+            Here is an imoprtant agreement for you to accept
+        </p>
+    </Modal>
+
     const start = (async () => {
         const response = await startProductionOrder(productionOrderId)
         processResponse(response)
@@ -51,6 +67,7 @@ export function ProductionOrderActions({ productionOrderId, refresh }) {
 
     const processResponse = ((response) => {
         if (!response.data.isOk) {
+            setShowModal(true);
             toast.error('Error al cambiar de estado ' + response.data.status.message, {
                 position: "bottom-right",
                 style: {
@@ -98,6 +115,7 @@ export function ProductionOrderActions({ productionOrderId, refresh }) {
 
     return (
         <div>
+            {showModal && modal}
             <div className="mx-auto grid grid-cols-3 gap-x-2">
                 <button
                     className={getButtonsState(productionOrder).startedButtonDisabled ? inactiveClass : activeClass}
