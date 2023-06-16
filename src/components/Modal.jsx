@@ -11,14 +11,14 @@ function Modal({onClose, children, actionBar}){
     return ReactDOM.createPortal(
         <div>
             <div onClick={onClose} className="fixed inset-0 bg-gray-300 opacity-80"></div>
-            <div className="mx-auto grid grid-cols-4 fixed inset-40 p-7 bg-white">
-                <div className="flex flex-col justify-btween h-full col-span-3 bg-slate-500">
+            <div className="fixed inset-60 p-2 bg-white">
+                <div className="relative flex flex-col justify-between h-full bg-slate-100 my-auto grid-cols-3">
                     {children}
-                </div>
-                <div className="flex justify-end">
+                    <div className="flex justify-end col-span-3">
                         {actionBar}
-                </div>
+                    </div>
 
+                </div>
             </div>
         </div>,
         document.querySelector('.modal-container')/**Está definido en el index.html */

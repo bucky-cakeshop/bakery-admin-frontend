@@ -67,7 +67,7 @@ function RecipeFormPage() {
                     {...register("description", { required: true })}
                     className=' bg-blue-100 p-3 rounded-lg block w-full mb-3'
                 />
-                {errors.description && <span>Campo requerido</span>}             
+                {errors.description && <span>Campo requerido</span>}
             </form>
 
             <button className=' bg-blue-400 p-3 rounded-lg block w-full col-span-2 hover:bg-blue-500' onClick={handleSave}>Guardar</button>

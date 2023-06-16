@@ -111,12 +111,12 @@ function ProductionOrderFormPage() {
             </div>
             <div>
                 {params.id &&
-                    <ProductionOrderActions productionOrderId={params.id} refresh={loadProductionOrder}></ProductionOrderActions>
+                    <ProductionOrderDetails productionOrderId={params.id} shouldUpdateState={canUpdateOrDeleteProductionOrder(productionOrder)}></ProductionOrderDetails>
                 }
             </div>
             <div>
                 {params.id &&
-                    <ProductionOrderDetails productionOrderId={params.id} shouldUpdateState={canUpdateOrDeleteProductionOrder(productionOrder)}></ProductionOrderDetails>
+                    <ProductionOrderActions productionOrderId={params.id} refresh={loadProductionOrder}></ProductionOrderActions>
                 }
             </div>
         </div>

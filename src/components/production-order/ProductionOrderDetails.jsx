@@ -6,6 +6,7 @@ import { ProductionOrderDetailForm } from "./ProductionOrderDetailForm";
 import { GoTrashcan } from 'react-icons/go'
 import { toast } from 'react-hot-toast';
 import { ProductionOrderAggregatedIngredients } from './ProductionOrderAggregatedIngredients';
+import { ProductionOrderAggregatedProducts } from './ProductionOrderAggregatedProducts';
 
 export function ProductionOrderDetails({ productionOrderId, shouldUpdateState }) {
     const [productionOrderDetails, setProductionOrderDetails] = useState([]);
@@ -86,12 +87,15 @@ export function ProductionOrderDetails({ productionOrderId, shouldUpdateState })
                 }
 
             </div>
-            <div className="">
+            <div className="col-span-2">
                 <h1 className="font-bold text-xl mb-1 mt-4">Detalle de la orden de producción</h1>
                 <SorteableTable data={productionOrderDetails} config={config} keyFn={keyFn}></SorteableTable>
             </div>
             <div className="">
                 <ProductionOrderAggregatedIngredients productionOrderId={productionOrderId} items={productionOrderDetails}></ProductionOrderAggregatedIngredients>
+            </div>
+            <div className="">
+                <ProductionOrderAggregatedProducts productionOrderId={productionOrderId} items={productionOrderDetails}></ProductionOrderAggregatedProducts>
             </div>
 
         </div>
