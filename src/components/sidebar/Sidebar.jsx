@@ -18,6 +18,7 @@ function Sidebar() {
         { label: 'Productos', path: "/products" },
         { label: 'C. de proveedores', path: "/supplier-invoice" },
         { label: 'O. de producción', path: "/production-orders" },
+        { label: 'Prod. stock', path: "/product-stocks" },
     ];
     const handleOptionSelection = (to) => {
         setSelectedOption(to)

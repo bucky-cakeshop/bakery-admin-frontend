@@ -19,6 +19,8 @@ import ProductionOrderPage from './pages/ProductionOrderPage';
 import ProductionOrderFormPage from './pages/ProductionOrderFormPage';
 import ProductPage from './pages/product/ProductPage';
 import ProductFormPage from './pages/product/ProductFormPage';
+import ProductStockPage from './pages/product-stock/ProductStockPage';
+import ProductStockFormPage from './pages/product-stock/ProductStockFormPage';
 
 
 import { Toaster } from 'react-hot-toast'
@@ -71,6 +73,10 @@ function App() {
                         <Route path='/products' element={<ProductPage />} />
                         <Route path='/products-create' element={<ProductFormPage />} />
                         <Route path='/products/:id' element={<ProductFormPage />} />
+
+                        <Route path='/product-stocks' element={<ProductStockPage />} />
+                        <Route path='/product-stocks-create' element={<ProductStockFormPage />} />
+                        <Route path='/product-stocks/:id' element={<ProductStockFormPage />} />
 
                     </Routes>
                     <Toaster />

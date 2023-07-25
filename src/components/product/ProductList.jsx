@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from '../../api/product.api'
 import { ProductCard } from "./ProductCard";
 
-function RecipeList() {
+function ProductList() {
     const [products, setproducts] = useState([]);
 
     useEffect(() => {
@@ -27,4 +27,4 @@ function RecipeList() {
         </div>
     );
 }
-export default RecipeList
+export default ProductList
