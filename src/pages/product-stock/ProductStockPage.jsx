@@ -5,7 +5,7 @@ function ProductStockPage() {
     return(
         <div>
             <div className='col-span-2'>
-                <ComponentNavigationHeader listPath="/productStocks" createPath="/productStocks-create" title="Stock de productos" />
+                <ComponentNavigationHeader listPath="/product-stocks" createPath="/product-stocks-create" title="Stock de productos" />
             </div>
             <div>
                 <ProductStockList />

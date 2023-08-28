@@ -92,26 +92,29 @@ function ProductStockFormPage() {
             <div className='col-span-3'>
                 <ComponentNavigationHeader listPath="/product-stocks" createPath="/product-stocks-create" title="Stock de Productos" />
             </div>
-            <p>
-                Si es nuevo
-                - seleccionar producto. Producto
-                - Unidad de medida
-                - Cantidad
-                - isForSell = true
-                - Lote
-                - Fecha de expiración
-                - Precio de costo unitario
-                - Precio de venta unitario
-                Si es edición
-                - (RO) Se muestra el Producto
-                - (RO) Se muestra la Unidad de medida
-                - Cantidad
-                - (RO) Cantidad consumida
-                - (RO) se muestra isForSell = true
-                - (RO) Se muestra Lote
-                - (RO) Se muestra Fecha de expiración
-                - (RO) Precio de costo unitario
-                - Precio de venta unitario
+            <p className='col-span-3'>
+                <ul>Si es nuevo<br></br>
+                    <li>- seleccionar producto. Producto</li>
+                    <li>- Unidad de medida</li>
+                    <li>- Cantidad</li>
+                    <li>- isForSell = true</li>
+                    <li>- Lote</li>
+                    <li>- Fecha de expiración</li>
+                    <li>- Precio de costo unitario</li>
+                    <li>- Precio de venta unitario</li>
+                </ul><br />
+                <ul>Si es edición
+                    <li>- (RO) Se muestra el Producto</li>
+                    <li>- (RO) Se muestra la Unidad de medida</li>
+                    <li>- Cantidad</li>
+                    <li>- (RO) Cantidad consumida</li>
+                    <li>- (RO) se muestra isForSell = true</li>
+                    <li>- (RO) Se muestra Lote</li>
+                    <li>- (RO) Se muestra Fecha de expiración</li>
+                    <li>- (RO) Precio de costo unitario</li>
+                    <li>- Precio de venta unitario</li>
+                </ul><br />
+                <b>Mostrar listado de cantidades disponibles agrupado por producto</b><br />
 
             </p>
 
